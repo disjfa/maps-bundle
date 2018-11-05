@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <h1>Maps</h1>
+
+        {% if app.user %}
+            <a href="{{ path('disjfa_map_map_create') }}" class="btn btn-primary">create new map</a>
+        {% endif %}
+
+
+        {% for map in maps %}
+            <div class="border-top my-2 py-2">
+                <h3>{{ map.title }}</h3>
+                <a href="{{ path('disjfa_map_map_show', {map: map.id}) }}" class="btn btn-outline-primary">Show map</a>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}

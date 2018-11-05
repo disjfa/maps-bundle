@@ -7,3 +7,11 @@ services:
     Disjfa\MapsBundle\:
         resource: './../../*'
         exclude: './../../{Entity,Migrations,Tests}'
+
+    Disjfa\MapsBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+
+    Disjfa\MapsBundle\Security\:
+        resource: './../../Security/*'
+        tags: ['security.voter']
