@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <the-map map-id="{{ map.id }}"></the-map>
+    <the-map map-url="{{ path('disjfa_map_api_map_get', {map: map.id}) }}"></the-map>
     <div class="container py-3">
         <h1>{{ map.title }}</h1>
+        <p>{{ map.description }}</p>
     </div>
 {% endblock %}
 

@@ -6,6 +6,7 @@ use App\Form\Errors\Serializer;
 use Disjfa\MapsBundle\Entity\Map;
 use Disjfa\MapsBundle\Entity\MapMarker;
 use Disjfa\MapsBundle\Form\Type\MapMarkerType;
+use Disjfa\MapsBundle\Security\MapVoter;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -29,13 +30,13 @@ class MapMarkerController extends AbstractController
      */
     public function post(Map $map, Request $request)
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted(MapVoter::PATCH, $map);
 
         $mapMarker = new MapMarker($map);
         $form = $this->createForm(MapMarkerType::class, $mapMarker);
         $data = json_decode($request->getContent(), true);
-        $form->submit($data['map_marker']);
 
+        $form->submit($data['map_marker']);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($mapMarker);

@@ -11,12 +11,9 @@ export default {
   createMarker(state, payload) {
     const { url, data } = payload;
 
-    const formData = new FormData();
-    Object.keys(data).forEach(function (key) {
-      formData.set(`map_marker[${key}]`, data[key]);
+    return axios.post(url, {
+      map_marker: data,
     });
-
-    return axios.post(url, formData);
   },
   patchMarker(state, payload) {
     const { url, data } = payload;

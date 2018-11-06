@@ -4,6 +4,7 @@ namespace Disjfa\MapsBundle\Form\Type;
 
 use Disjfa\MapsBundle\Entity\Map;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,6 +20,12 @@ class MapType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title', TextType::class, [
+            'constraints' => [
+                new NotBlank(),
+                new NotNull(),
+            ]
+        ]);
+        $builder->add('description', TextareaType::class, [
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),

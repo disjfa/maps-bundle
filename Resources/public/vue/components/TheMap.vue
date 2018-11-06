@@ -2,6 +2,7 @@
   <div style="height: 70vh; position: relative;">
     <l-map
       style="height: 70vh"
+      v-if="map"
       @update:bounds="setBounds"
       @update:center="setCenter"
       @update:zoom="setZoom"
@@ -16,8 +17,8 @@
       <template v-if="!editing">
         <l-marker v-for="marker in markers" :lat-lng="[marker.center_lat, marker.center_lng]" :key="marker.id">
           <l-popup>
-            <p>{{marker.title}}</p>
-            <a href="#" class="btn btn-primary" v-if="marker.links.patch_url" @click="editMarker(marker)">Edit</a>
+            <p>{{ marker.title }}</p>
+            <a href="#" class="btn btn-link" v-if="marker.links.patch_url" @click="editMarker(marker)">Edit</a>
           </l-popup>
         </l-marker>
       </template>
@@ -25,11 +26,26 @@
 
     <div class="popup">
       <div v-if="editing">
-        <input type="text" class="form-control" v-model="currentMarker.title">
-        <button @click="saveMarker">save</button>
+        <a href="#" class="close" @click.prevent="stopEditing">
+          <span aria-hidden="true">&times;</span>
+        </a>
+        <div class="form-group">
+          <label for="map-title">Titel</label>
+          <input id="map-title" type="text" class="form-control" v-model="currentMarker.title">
+        </div>
+        <div class="form-group">
+          <button @click="saveMarker">save</button>
+        </div>
       </div>
       <div v-else>
-        <a href="#" @click="mapCenter" class="btn btn-primary">center</a>
+        <a v-if="map.links && map.links.create_marker_url" href="#" @click.prevent="createMarker" class="btn btn-primary btn-block">
+          <i class="fas fa-expand-arrows-alt"></i>
+          Center
+        </a>
+        <a href="#" @click.prevent="mapCenter" class="btn btn-primary btn-block">
+          <i class="fas fa-expand-arrows-alt"></i>
+          Center
+        </a>
       </div>
     </div>
   </div>
@@ -38,7 +54,6 @@
 <script>
   import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
   import L from 'leaflet';
-  import axios from 'axios';
 
   delete L.Icon.Default.prototype._getIconUrl;
   L.Icon.Default.mergeOptions({
@@ -56,7 +71,7 @@
       LPopup
     },
     props: {
-      mapId: {
+      mapUrl: {
         type: String,
         required: true,
       },
@@ -85,7 +100,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch('map/getMap', '/api/map/' + this.mapId);
+      this.$store.dispatch('map/getMap', this.mapUrl);
     },
     computed: {
       center() {
@@ -99,6 +114,17 @@
       }
     },
     methods: {
+      stopEditing: function() {
+        this.editing = false;
+      },
+      createMarker: function() {
+        const { mapObject } = this.$refs.map;
+        this.marker = mapObject.getCenter();
+        this.currentMarker = {
+          title: '',
+        };
+        this.editing = true;
+      },
       editMarker: function (marker) {
         this.marker = [marker.center_lat, marker.center_lng];
         this.currentMarker = marker;
@@ -111,13 +137,14 @@
 
         const data = {
           title: currentMarker.title,
-          map: this.mapId,
+          map: this.map.id,
           centerLat: lat,
           centerLng: lng,
         };
+
         if (currentMarker.id) {
           const { patch_url } = currentMarker.links;
-          if(!patch_url) {
+          if (!patch_url) {
             return;
           }
 
@@ -126,11 +153,11 @@
             data,
           }).then(() => {
             this.editing = false;
-            this.$store.dispatch('map/getMap', '/api/map/' + this.mapId);
+            this.$store.dispatch('map/getMap', this.mapUrl);
           });
         } else {
           const { create_marker_url } = this.map.links;
-          if(!create_marker_url) {
+          if (!create_marker_url) {
             return;
           }
 
@@ -139,7 +166,7 @@
             data,
           }).then(() => {
             this.editing = false;
-            this.$store.dispatch('map/getMap', '/api/map/' + this.mapId);
+            this.$store.dispatch('map/getMap', this.mapUrl);
           });
         }
       },
