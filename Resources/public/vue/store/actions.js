@@ -8,16 +8,20 @@ export default {
         state.commit('setupMap', res.data.data);
       });
   },
+  patchMap(state, payload) {
+    const { url, data } = payload;
+    return axios.patch(url, {
+      map: data,
+    });
+  },
   createMarker(state, payload) {
     const { url, data } = payload;
-
     return axios.post(url, {
       map_marker: data,
     });
   },
   patchMarker(state, payload) {
     const { url, data } = payload;
-
     return axios.patch(url, {
       map_marker: data,
     });

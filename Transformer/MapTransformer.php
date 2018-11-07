@@ -58,6 +58,7 @@ class MapTransformer extends TransformerAbstract
             'title' => $map->getTitle(),
             'center_lat' => $map->getCenterLat(),
             'center_lng' => $map->getCenterLng(),
+            'zoom' => $map->getZoom(),
         ];
 
         $links = [];

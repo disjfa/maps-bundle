@@ -4,7 +4,6 @@ namespace Disjfa\MapsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
-use JsonSerializable;
 use Ramsey\Uuid\Uuid;
 
 /**
@@ -27,14 +26,20 @@ class MapMarker
     private $title;
 
     /**
+     * @var string
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @var float
-     * @ORM\Column(name="center_lat", type="float", nullable=true)
+     * @ORM\Column(name="center_lat", type="decimal", scale=12, precision=18, nullable=true)
      */
     private $centerLat;
 
     /**
      * @var float
-     * @ORM\Column(name="center_lng", type="float", nullable=true)
+     * @ORM\Column(name="center_lng", type="decimal", scale=12, precision=18, nullable=true)
      */
     private $centerLng;
 
@@ -76,6 +81,22 @@ class MapMarker
     public function setTitle(string $title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     /**

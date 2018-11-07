@@ -41,14 +41,14 @@ class Map
     private $zoom;
 
     /**
-     * @var int
-     * @ORM\Column(name="center_lat", type="decimal", nullable=true)
+     * @var float
+     * @ORM\Column(name="center_lat", type="decimal", scale=12, precision=18, nullable=true)
      */
     private $centerLat;
 
     /**
-     * @var int
-     * @ORM\Column(name="center_lng", type="decimal", nullable=true)
+     * @var float
+     * @ORM\Column(name="center_lng", type="decimal", scale=12, precision=18, nullable=true)
      */
     private $centerLng;
     /**
@@ -116,7 +116,7 @@ class Map
     /**
      * @return int
      */
-    public function getZoom(): int
+    public function getZoom(): ?int
     {
         return $this->zoom;
     }
@@ -130,33 +130,33 @@ class Map
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getCenterLat(): ?int
+    public function getCenterLat(): ?float
     {
         return $this->centerLat;
     }
 
     /**
-     * @param int $centerLat
+     * @param float $centerLat
      */
-    public function setCenterLat(int $centerLat): void
+    public function setCenterLat(float $centerLat): void
     {
         $this->centerLat = $centerLat;
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getCenterLng(): ?int
+    public function getCenterLng(): ?float
     {
         return $this->centerLng;
     }
 
     /**
-     * @param int $centerLng
+     * @param float $centerLng
      */
-    public function setCenterLng(int $centerLng): void
+    public function setCenterLng(float $centerLng): void
     {
         $this->centerLng = $centerLng;
     }

@@ -15,3 +15,8 @@ services:
     Disjfa\MapsBundle\Security\:
         resource: './../../Security/*'
         tags: ['security.voter']
+
+    Disjfa\MapsBundle\Menu\MapsMenuListener:
+        autowire: true
+        tags:
+        - { name: 'kernel.event_listener', event: 'site.menu_configure', method: 'onMenuConfigure', priority: -50 }

@@ -35,6 +35,7 @@ class MapMarkerTransformer extends TransformerAbstract
         $data = [
             'id' => $mapMarker->getId(),
             'title' => $mapMarker->getTitle(),
+            'description' => $mapMarker->getDescription(),
             'center_lat' => $mapMarker->getCenterLat(),
             'center_lng' => $mapMarker->getCenterLng(),
         ];
