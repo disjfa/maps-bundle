@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div style="position: relative;">
+    <div class="map">
       <template v-if="map.id">
         <l-map
-          class="map"
           :zoom="zoom"
           :center="center"
           ref="map"
@@ -171,7 +170,7 @@ export default {
         data,
       });
     },
-    centerLatLng: function(evt) {
+    centerLatLng: function (evt) {
       const { mapObject } = this.$refs.map;
       mapObject.panTo(evt)
     },
@@ -180,7 +179,7 @@ export default {
       const center = L.latLng(center_lat, center_lng);
       const { mapObject } = this.$refs.map;
       mapObject.setView(center, 11);
-      this.$el.scrollIntoView({behavior: 'smooth', block: 'start'});
+      this.$el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     },
     stopEditing: function () {
       this.editing = false;
@@ -260,8 +259,9 @@ export default {
 <style type="scss">
   @import "~leaflet/dist/leaflet.css";
 
-  .vue2leaflet-map {
-    height: 70vh !important;
+  .map {
+    height: 70vh;
+    position: relative;
   }
 
   .leaflet-container {
