@@ -36,8 +36,11 @@ class MapController extends AbstractController
 
     /**
      * @Route("/create", name="disjfa_map_map_create")
+     *
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws Exception
      */
     public function create(Request $request)
@@ -65,7 +68,9 @@ class MapController extends AbstractController
 
     /**
      * @Route("/{map}", name="disjfa_map_map_show")
+     *
      * @param Map $map
+     *
      * @return Response
      */
     public function show(Map $map)

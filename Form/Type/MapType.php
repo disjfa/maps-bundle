@@ -15,7 +15,7 @@ class MapType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,13 +23,13 @@ class MapType extends AbstractType
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
         $builder->add('description', TextareaType::class, [
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
     }
 

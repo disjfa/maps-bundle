@@ -23,9 +23,12 @@ class MapMarkerController extends AbstractController
     /**
      * @Route("/{map}", name="disjfa_map_api_map_marker_post")
      * @Method("POST")
-     * @param Map $map
+     *
+     * @param Map     $map
      * @param Request $request
+     *
      * @return Response
+     *
      * @throws Exception
      */
     public function post(Map $map, Request $request)
@@ -46,15 +49,17 @@ class MapMarkerController extends AbstractController
         }
 
         return new JsonResponse([
-            'errors' => Serializer::serialize($form)
+            'errors' => Serializer::serialize($form),
         ], 400);
     }
 
     /**
      * @Route("/{marker}", name="disjfa_map_api_map_marker_patch")
      * @Method("PATCH")
+     *
      * @param MapMarker $marker
-     * @param Request $request
+     * @param Request   $request
+     *
      * @return Response
      */
     public function patch(MapMarker $marker, Request $request)
@@ -72,7 +77,7 @@ class MapMarkerController extends AbstractController
         }
 
         return new JsonResponse([
-            'errors' => Serializer::serialize($form)
+            'errors' => Serializer::serialize($form),
         ], 400);
     }
 }

@@ -17,7 +17,7 @@ class MapMarkerType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,7 +25,7 @@ class MapMarkerType extends AbstractType
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
 
         $builder->add('description', TextType::class);
@@ -35,21 +35,21 @@ class MapMarkerType extends AbstractType
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
 
         $builder->add('centerLat', NumberType::class, [
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
 
         $builder->add('centerLng', NumberType::class, [
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
     }
 

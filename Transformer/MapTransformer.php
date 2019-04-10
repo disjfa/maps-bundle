@@ -32,16 +32,16 @@ class MapTransformer extends TransformerAbstract
 
     /**
      * MapTransformer constructor.
+     *
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param RouterInterface $router
-     * @param MapMarkerTransformer $mapMarkerTransformer
+     * @param RouterInterface               $router
+     * @param MapMarkerTransformer          $mapMarkerTransformer
      */
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,
         RouterInterface $router,
         MapMarkerTransformer $mapMarkerTransformer
-    )
-    {
+    ) {
         $this->authorizationChecker = $authorizationChecker;
         $this->router = $router;
         $this->mapMarkerTransformer = $mapMarkerTransformer;
@@ -49,6 +49,7 @@ class MapTransformer extends TransformerAbstract
 
     /**
      * @param Map $map
+     *
      * @return array
      */
     public function transform(Map $map)
@@ -75,12 +76,13 @@ class MapTransformer extends TransformerAbstract
         }
 
         $data['links'] = $links;
+
         return $data;
     }
 
-
     /**
      * @param Map $map
+     *
      * @return Collection
      */
     public function includeMarkers(Map $map)

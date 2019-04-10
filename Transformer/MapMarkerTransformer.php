@@ -21,8 +21,9 @@ class MapMarkerTransformer extends TransformerAbstract
 
     /**
      * MapTransformer constructor.
+     *
      * @param AuthorizationCheckerInterface $authorizationCheker
-     * @param RouterInterface $router
+     * @param RouterInterface               $router
      */
     public function __construct(AuthorizationCheckerInterface $authorizationCheker, RouterInterface $router)
     {
@@ -48,6 +49,7 @@ class MapMarkerTransformer extends TransformerAbstract
         }
 
         $data['links'] = $links;
+
         return $data;
     }
 }

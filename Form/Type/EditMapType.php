@@ -14,7 +14,7 @@ class EditMapType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,19 +22,19 @@ class EditMapType extends AbstractType
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
         $builder->add('centerLng', NumberType::class, [
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
         $builder->add('zoom', NumberType::class, [
             'constraints' => [
                 new NotBlank(),
                 new NotNull(),
-            ]
+            ],
         ]);
     }
 

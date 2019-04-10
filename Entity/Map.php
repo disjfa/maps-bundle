@@ -64,6 +64,7 @@ class Map
 
     /**
      * @param UserInterface $user
+     *
      * @throws Exception
      */
     public function __construct(UserInterface $user)
@@ -78,7 +79,7 @@ class Map
      */
     public function getId()
     {
-        return (string)$this->id;
+        return (string) $this->id;
     }
 
     /**

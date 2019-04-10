@@ -24,22 +24,27 @@ class MapController extends AbstractController
     /**
      * @Route("/{map}", name="disjfa_map_api_map_get")
      * @Method("GET")
-     * @param Map $map
+     *
+     * @param Map            $map
      * @param MapTransformer $mapTransformer
+     *
      * @return Response
      */
     public function getAction(Map $map, MapTransformer $mapTransformer)
     {
         $item = new Item($map, $mapTransformer);
         $manager = new Manager();
+
         return new JsonResponse($manager->createData($item)->toArray());
     }
 
     /**
      * @Route("/{map}", name="disjfa_map_api_map_patch")
      * @Method("PATCH")
-     * @param Map $map
+     *
+     * @param Map     $map
      * @param Request $request
+     *
      * @return Response
      */
     public function patchAction(Map $map, Request $request)
@@ -59,7 +64,7 @@ class MapController extends AbstractController
         }
 
         return new JsonResponse([
-            'errors' => Serializer::serialize($form)
+            'errors' => Serializer::serialize($form),
         ], 400);
     }
 }

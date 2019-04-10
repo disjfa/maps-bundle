@@ -51,6 +51,7 @@ class MapMarker
 
     /**
      * @param Map $map
+     *
      * @throws Exception
      */
     public function __construct(Map $map)
@@ -64,7 +65,7 @@ class MapMarker
      */
     public function getId()
     {
-        return (string)$this->id;
+        return (string) $this->id;
     }
 
     /**

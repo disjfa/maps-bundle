@@ -15,16 +15,17 @@ class MapMarkerVoter extends Voter
 
     /**
      * @param string $attribute
-     * @param mixed $subject
+     * @param mixed  $subject
+     *
      * @return bool
      */
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, array(self::PATCH, self::POST))) {
+        if ( ! in_array($attribute, [self::PATCH, self::POST])) {
             return false;
         }
 
-        if (!$subject instanceof MapMarker) {
+        if ( ! $subject instanceof MapMarker) {
             return false;
         }
 
@@ -32,9 +33,10 @@ class MapMarkerVoter extends Voter
     }
 
     /**
-     * @param string $attribute
-     * @param MapMarker $mapMarker
+     * @param string         $attribute
+     * @param MapMarker      $mapMarker
      * @param TokenInterface $token
+     *
      * @return bool
      */
     protected function voteOnAttribute($attribute, $mapMarker, TokenInterface $token)
@@ -58,8 +60,9 @@ class MapMarkerVoter extends Voter
     }
 
     /**
-     * @param MapMarker $mapMarker
+     * @param MapMarker     $mapMarker
      * @param UserInterface $user
+     *
      * @return bool
      */
     private function canPatch(MapMarker $mapMarker, UserInterface $user)
@@ -68,13 +71,13 @@ class MapMarkerVoter extends Voter
     }
 
     /**
-     * @param MapMarker $mapMarker
+     * @param MapMarker     $mapMarker
      * @param UserInterface $user
+     *
      * @return bool
      */
     private function canPost(MapMarker $mapMarker, UserInterface $user)
     {
         return $mapMarker->getMap()->getUserId() == $user->getId();
     }
-
 }
